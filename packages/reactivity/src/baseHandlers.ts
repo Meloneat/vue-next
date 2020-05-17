@@ -34,7 +34,7 @@ const arrayInstrumentations: Record<string, Function> = {}
 })
 
 function createGetter(isReadonly = false, shallow = false) {
-  return function get(target: object, key: string | symbol, receiver: object) {
+  return function get(target: object, key: string | number | symbol, receiver: object) {
     if (key === ReactiveFlags.isReactive) {
       return !isReadonly
     } else if (key === ReactiveFlags.isReadonly) {
@@ -85,7 +85,7 @@ const shallowSet = /*#__PURE__*/ createSetter(true)
 function createSetter(shallow = false) {
   return function set(
     target: object,
-    key: string | symbol,
+    key: string | number | symbol,
     value: unknown,
     receiver: object
   ): boolean {
